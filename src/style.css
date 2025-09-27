@@ -54,17 +54,22 @@ body {
 .container {
     background-color: #ffffff;
     padding: 35px 45px;
-    border-radius: 15px; /* Bentuk yang lebih kubus tapi tetap lembut */
+    border-radius: 15px;
     box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.1), /* Bayangan utama */
-        0 0 0 5px rgba(255, 204, 229, 0.5), /* Border semu pink */
-        0 0 0 10px rgba(200, 230, 201, 0.3); /* Border semu hijau muda */
+        0 8px 30px rgba(0, 0, 0, 0.1),
+        0 0 0 5px rgba(255, 204, 229, 0.5),
+        0 0 0 10px rgba(200, 230, 201, 0.3);
     width: 100%;
     max-width: 550px;
     text-align: center;
     position: relative;
-    z-index: 1; /* Pastikan di atas karakter */
-    animation: fadeIn 1s ease-out; /* Animasi muncul */
+    z-index: 1;
+    
+    /* --- PERUBAHAN DIMULAI DI SINI --- */
+    display: flex;
+    flex-direction: column;
+    /* Batasi tinggi kontainer utama di layar HP */
+    max-height: 90vh; 
 }
 
 @keyframes fadeIn {
@@ -137,8 +142,11 @@ button[type="submit"]:hover {
 
 .task-list-container {
     margin-top: 35px;
-    text-align: center;
-
+    text-align: left;
+    
+    flex-grow: 1; 
+    overflow: hidden; 
+    min-height: 0;
 }
 
 h2 {
@@ -333,7 +341,8 @@ h2 {
 
 #task-list {
     list-style-type: none;
-    padding-right: 15px; /* Memberi ruang untuk scrollbar */
-    max-height: 30vh; /* Batasi tinggi maksimal hingga 30% dari tinggi layar */
-    overflow-y: auto; /* Tampilkan scrollbar vertikal HANYA jika perlu */
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px; /* Sedikit padding untuk scrollbar */
+    -webkit-overflow-scrolling: touch; /* Tetap gunakan ini untuk scrolling mulus */
 }
