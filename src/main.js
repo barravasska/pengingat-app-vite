@@ -64,13 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
     registerButton.addEventListener('click', () => {
         const email = registerEmail.value;
         const password = registerPassword.value;
+    
         auth.createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
+                // Jika berhasil, tampilkan pesan sukses
                 Swal.fire('Sukses!', 'Akun berhasil dibuat. Silakan login.', 'success');
                 registerView.style.display = 'none';
                 loginView.style.display = 'block';
             })
-            .catch(error => Swal.fire('Oops...', error.message, 'error'));
+            .catch(error => {
+                // Jika gagal, periksa kode errornya
+                let pesanError = "Oops... terjadi kesalahan. Coba lagi nanti."; // Pesan default
+    
+                switch (error.code) {
+                    case "auth/weak-password":
+                        pesanError = "Minimal 6 karakter sayang.";
+                        break;
+                    case "auth/email-already-in-use":
+                        pesanError = "Duh, email ini sudah terdaftar. Coba login saja.";
+                        break;
+                    case "auth/invalid-email":
+                        pesanError = "Format email-nya sepertinya salah, coba cek lagi beb.";
+                        break;
+                }
+    
+                // Tampilkan pesan error kustom kita
+                Swal.fire('Oops...', pesanError, 'error');
+            });
     });
 
     loginButton.addEventListener('click', () => {
