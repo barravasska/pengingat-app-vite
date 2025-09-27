@@ -126,21 +126,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function loadTasks() {
-        // Hentikan listener lama sebelum memulai yang baru
-        if (unsubscribe) unsubscribe();
+  function loadTasks() {
+    // Hentikan listener lama sebelum memulai yang baru
+    if (unsubscribe) unsubscribe();
 
-        unsubscribe = tasksCollection.orderBy('completed').orderBy('time').onSnapshot(snapshot => {
-            taskList.innerHTML = '';
-            Object.values(activeTimeouts).forEach(clearTimeout);
-            activeTimeouts = {};
+    unsubscribe = tasksCollection.orderBy('completed').orderBy('time').onSnapshot(snapshot => {
+        
+        // CUKUP TAMBAHKAN SATU BARIS INI
+        console.log("Menerima data dari Firestore:", snapshot.docs); 
 
-            snapshot.docs.forEach(doc => {
-                renderTask(doc);
-            });
+        // Sisa kodenya biarkan seperti semula
+        taskList.innerHTML = '';
+        Object.values(activeTimeouts).forEach(clearTimeout);
+        activeTimeouts = {};
+
+        snapshot.docs.forEach(doc => {
+            renderTask(doc);
         });
-    }
-
+    });
+}
     reminderForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const taskText = taskInput.value.trim();
