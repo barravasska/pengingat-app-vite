@@ -295,9 +295,10 @@ h2 {
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    flex-direction: column; /* Mengubah tata letak menjadi vertikal */
+    align-items: center;    /* Judul akan tetap di tengah */
+    margin-bottom: 25px;    /* Memberi sedikit ruang ekstra di bawah */
+    position: relative;
 }
 
 .header h1 {
@@ -308,6 +309,8 @@ h2 {
 .user-info {
     font-size: 0.9em;
     text-align: right;
+    width: 100%;            /* Membuatnya memenuhi lebar kontainer */
+    margin-top: -10px;      /* Sedikit menaikkan posisi agar lebih dekat ke judul */
 }
 
 #logout-button {
